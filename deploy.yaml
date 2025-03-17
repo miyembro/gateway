@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: gateway-service
-          image: arjayfuentes24/gateway-miyembro:latest
+          image: ${REPOSITORY_TAG}
           ports:
             - containerPort: 8222
           env:
