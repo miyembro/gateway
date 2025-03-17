@@ -41,7 +41,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                     exchange.getRequest().mutate().header("Authorization", "Bearer " + token).build();
                     return chain.filter(exchange);
                 } else {
-                    return handleForbiddenResponse(exchange, "You must log in to access this resource. uiuiui");
+                    return handleForbiddenResponse(exchange, "You must log in to access this resource. NEW");
                 }
             } catch (SignatureException e) {
                 return handleUnauthorizedResponse(exchange, "Unauthorized: Missing or invalid token. nEW");
