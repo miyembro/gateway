@@ -28,7 +28,6 @@ pipeline {
 
         stage('Build and Push Image') {
             steps {
-                 sh 'docker --version'
                 sh 'docker image build -t ${IMAGE_TAG} .'  // Build the Docker image
                 sh 'docker push ${REPOSITORY_TAG}'  // Push the Docker image to the registry
             }
