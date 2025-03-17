@@ -44,7 +44,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                     return handleForbiddenResponse(exchange, "You must log in to access this resource. uiuiui");
                 }
             } catch (SignatureException e) {
-                return handleUnauthorizedResponse(exchange, "Unauthorized: Missing or invalid token.");
+                return handleUnauthorizedResponse(exchange, "Unauthorized: Missing or invalid token. nEW");
             }
         };
     }
