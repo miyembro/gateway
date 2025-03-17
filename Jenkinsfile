@@ -9,6 +9,7 @@ pipeline {
         SERVICE_NAME = "gateway"  // Replace with your service name
         IMAGE_TAG = "${SERVICE_NAME}-${ORGANIZATION_NAME}:latest"
         REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${SERVICE_NAME}-${ORGANIZATION_NAME}:latest"
+        DOCKER_HUB_CREDS = credentials('ee75d658-a41b-48ee-b6fa-168da312c390')  // Use the ID of your Docker Hub credentials
     }
 
     stages {
@@ -28,8 +29,19 @@ pipeline {
 
         stage('Build and Push Image') {
             steps {
-                sh 'docker image build -t ${IMAGE_TAG} .'  // Build the Docker image
-                sh 'docker push ${REPOSITORY_TAG}'  // Push the Docker image to the registry
+                script {
+                    // Authenticate with Docker Hub using the credentials
+                    sh "echo ${DOCKER_HUB_CREDS_PSW} | docker login -u ${DOCKER_HUB_CREDS_USR} --password-stdin"
+
+                    // Build the Docker image
+                    sh "docker image build -t ${IMAGE_TAG} ."
+
+                    // Tag the Docker image for the repository
+                    sh "docker tag ${SERVICE_NAME} ${REPOSITORY_TAG}"
+
+                    // Push the Docker image to Docker Hub
+                    sh "docker push ${REPOSITORY_TAG}"
+                }
             }
         }
 
