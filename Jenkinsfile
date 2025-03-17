@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:dind'
-            args '--privileged'
-        }
-    }
+    agent any
 
     environment {
         // You must set the following environment variables
