@@ -7,7 +7,7 @@ pipeline {
         // DOCKERHUB_USERNAME (it doesn't matter if you don't have one)
 
         SERVICE_NAME = "gateway"  // Replace with your service name
-        REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${SERVICE_NAME}-${ORGANIZATION_NAME}:${BUILD_ID}"
+        REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${SERVICE_NAME}-${ORGANIZATION_NAME}:latest"
     }
 
     stages {
