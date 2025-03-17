@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'docker:dind'  # Use the Docker-in-Docker image
-            args '--privileged'  # Required for DinD
+            image 'docker:dind'
+            args '--privileged'
         }
     }
 
