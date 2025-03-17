@@ -41,7 +41,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                     exchange.getRequest().mutate().header("Authorization", "Bearer " + token).build();
                     return chain.filter(exchange);
                 } else {
-                    return handleForbiddenResponse(exchange, "You must log in to access this resource.");
+                    return handleForbiddenResponse(exchange, "You must log in to access this resource. uiuiui");
                 }
             } catch (SignatureException e) {
                 return handleUnauthorizedResponse(exchange, "Unauthorized: Missing or invalid token.");
@@ -52,7 +52,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     private String extractJwtFromRequest(ServerWebExchange exchange) {
         String header = exchange.getRequest().getHeaders().getFirst("Authorization");
         if (header != null && header.startsWith("Bearer ")) {
-            return header.substring(7);  // Extract token after "Bearer "
+            return header.substring(7); // Extract token after "Bearer "
         }
         return null;
     }
@@ -62,7 +62,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         response.setStatusCode(HttpStatus.FORBIDDEN);
 
         response.getHeaders().set("Content-Type", "application/json");
-        String body = "{ \"error\": \"Access denied\", \"message\": \"" + message + "\" }";  // Correct JSON format
+        String body = "{ \"error\": \"Access denied\", \"message\": \"" + message + "\" }"; // Correct JSON format
 
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes());
 
@@ -74,7 +74,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
 
         response.getHeaders().set("Content-Type", "application/json");
-        String body = "{ \"error\": \"Unauthorized\", \"message\": \"" + message + "\" }";  // Correct JSON format
+        String body = "{ \"error\": \"Unauthorized\", \"message\": \"" + message + "\" }"; // Correct JSON format
 
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes());
 
