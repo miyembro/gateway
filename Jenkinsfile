@@ -14,7 +14,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 cleanWs()  // Clean the workspace
-                git credentialsId: 'GitHub', url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}"  // Clone the repository
+                git credentialsId: 'GitHub', url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}", branch: 'main'  // Clone the repository
             }
         }
 
