@@ -15,6 +15,7 @@ pipeline {
             steps {
                 cleanWs()  // Clean the workspace
                 git credentialsId: 'GitHub', url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}", branch: 'main'  // Clone the repository
+                sh 'chmod +x gradlew'  // Add execute permission to gradlew
             }
         }
 
