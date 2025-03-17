@@ -7,6 +7,7 @@ pipeline {
         // DOCKERHUB_USERNAME (it doesn't matter if you don't have one)
 
         SERVICE_NAME = "gateway"  // Replace with your service name
+        IMAGE_TAG = "${SERVICE_NAME}-${ORGANIZATION_NAME}:latest"
         REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${SERVICE_NAME}-${ORGANIZATION_NAME}:latest"
     }
 
@@ -27,7 +28,7 @@ pipeline {
 
         stage('Build and Push Image') {
             steps {
-                sh 'docker image build -t ${REPOSITORY_TAG} .'  // Build the Docker image
+                sh 'docker image build -t ${IMAGE_TAG} .'  // Build the Docker image
                 sh 'docker push ${REPOSITORY_TAG}'  // Push the Docker image to the registry
             }
         }
