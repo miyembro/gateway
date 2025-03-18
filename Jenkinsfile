@@ -6,10 +6,11 @@ pipeline {
         // ORGANIZATION_NAME
         // DOCKERHUB_USERNAME (it doesn't matter if you don't have one)
 
-        SERVICE_NAME = "gateway"  // Replace with your service name
-        IMAGE_TAG = "${SERVICE_NAME}-${ORGANIZATION_NAME}:${BUILD_NUMBER}"
-        REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${SERVICE_NAME}-${ORGANIZATION_NAME}:${BUILD_NUMBER}"
-        DOCKER_HUB_CREDS = credentials('miyembro-jenkins')  // Use the ID of your Docker Hub credentials
+        SERVICE_NAME = "gateway"
+        IMAGE_NAME = "gateway-miyembro"
+        IMAGE_TAG = "${IMAGE_NAME}:${BUILD_NUMBER}"
+        REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${IMAGE_TAG}"
+        DOCKER_HUB_CREDS = credentials('miyembro-docker-token')  // Use the ID of your Docker Hub credentials
     }
 
     stages {
@@ -30,6 +31,13 @@ pipeline {
         stage('Build and Push Image') {
             steps {
                 script {
+
+                    echo "REPOSITORY_TAG: ${REPOSITORY_TAG}"
+
+                    echo "IMAGE_TAG: ${IMAGE_TAG}"
+
+                    echo "IMAGE_NAME: ${IMAGE_NAME}"
+
                     // Authenticate with Docker Hub using the credentials
                     sh "echo ${DOCKER_HUB_CREDS_PSW} | docker login -u ${DOCKER_HUB_CREDS_USR} --password-stdin"
 
@@ -37,7 +45,7 @@ pipeline {
                     sh "docker image build -t ${IMAGE_TAG} ."
 
                     // Tag the Docker image for the repository
-                    sh "docker tag ${SERVICE_NAME}-${ORGANIZATION_NAME} ${REPOSITORY_TAG}"
+                    sh "docker tag ${IMAGE_NAME} ${REPOSITORY_TAG}"
 
                     // Push the Docker image to Docker Hub
                     sh "docker push ${REPOSITORY_TAG}"
