@@ -25,7 +25,8 @@ public class CorsGlobalConfig {
                 "http://51.20.206.136:4200",
                 "http://a8685bbecfb704a3d9be9ff7c79d600a-1930177911.eu-north-1.elb.amazonaws.com",
                 "https://localhost:4200",
-                "http://miyembroprod.s3-website.eu-north-1.amazonaws.com"
+                "http://miyembroprod.s3-website.eu-north-1.amazonaws.com",
+                "http://miyembro.net"
                 )
         ); // Allowed frontend origin
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allowed HTTP methods
