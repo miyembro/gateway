@@ -32,7 +32,9 @@ public class CorsGlobalConfig {
                 "https://localhost:4200",
                 "http://miyembroprod.s3-website.eu-north-1.amazonaws.com",
                 "http://miyembro.net",
-                "http://www.miyembro.net"
+                "http://www.miyembro.net",
+                "https://miyembro.net",
+                "https://www.miyembro.net"
                 )
         ); // Allowed frontend origin
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allowed HTTP methods
